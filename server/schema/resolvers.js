@@ -5,64 +5,63 @@ const resolvers = {
   Query: {
     // get a user by token (authentication)
     me: async (parent, args, context) => {
-        if (context.user) {
-          return User.findOne({ _id: context.user._id })
-            .populate({
-              path: "lists",
-              populate: {
-                path: "items", // Populate the 'items' field within each 'list'
-              },
-            })
-            .populate('friends')
-            .populate('sentLists')
-            .populate('receivedLists');
-        }
-        throw new AuthenticationError("You need to be logged in!");
-      },
-    // get all users
-    users: async () => {
-        return User.find()
+      if (context.user) {
+        return User.findOne({ _id: context.user._id })
           .populate({
             path: "lists",
             populate: {
-              path: "items", // Populate the 'items' field within each 'list'
+              path: "items",// Populate the 'items' field within each 'list'
             },
           })
-          .populate('friends')
-            .populate('sentLists')
-            .populate('receivedLists');
-      },
+          .populate("friends")
+          .populate("receivedLists");
+      }
+      throw new Error("You need to be logged in!");
+    },
+    // get all users
+    users: async () => {
+      return User.find()
+        .populate({
+          path: "lists",
+          populate: {
+            path: "items", // Populate the 'items' field within each 'list'
+          },
+        })
+        .populate("friends")
+        .populate("receivedLists");
+    },
     // get a user by username
     user: async (parent, { username }) => {
-        return User.findOne({ username }).populate({
-            path: 'lists',
-            populate: {
-                path: 'items' // Populate the 'items' field within each 'list'
-            }
+      return User.findOne({ username })
+        .populate({
+          path: "lists",
+          populate: {
+            path: "items", // Populate the 'items' field within each 'list'
+          },
         })
-        .populate('friends');
-  },
+        .populate("friends");
+    },
     // get all lists
     lists: async () => {
-        return List.find().populate({
-            path: 'items' // Populate the 'items' field within each 'list'
-        });
+      return List.find().populate({
+        path: "items", // Populate the 'items' field within each 'list'
+      });
     },
     // get a list by id
     list: async (parent, { listId }) => {
-        return List.findOne({ _id: listId }).populate({
-            path: 'items' // Populate the 'items' field within each 'list'
-        });
+      return List.findOne({ _id: listId }).populate({
+        path: "items", // Populate the 'items' field within each 'list'
+      });
     },
     // get all items
     items: async () => {
-        return Item.find();
+      return Item.find();
     },
     // get an item by id
     item: async (parent, { itemId }) => {
-        return Item.findOne({ _id: itemId });
+      return Item.findOne({ _id: itemId });
     },
-    },
+  },
   Mutation: {
     // add a user
     addUser: async (parent, args) => {
@@ -149,41 +148,54 @@ const resolvers = {
     // send a list
     sendList: async (parent, args, context) => {
       if (context.user) {
-        const list = await List.findByIdAndUpdate(
-          { _id: args.listId },
-          { $push: { sentLists: args.listId } },
-          { new: true }
-        );
-        await User.findByIdAndUpdate(
+        // Update the recipient's receivedLists
+        const recipient = await User.findByIdAndUpdate(
           { _id: args.recipientId },
           { $push: { receivedLists: args.listId } },
           { new: true }
         );
-        return list;
+    
+        // Update the sender's list to mark it as sent
+        const myself = await List.findByIdAndUpdate(
+          { _id: args.listId, userId: context.user._id },
+          {
+            $set: {
+              isSent: true,
+            },
+            $push: {
+              sentTo: recipient,
+            },
+          },
+          { new: true }
+        );
+    
+        return myself;
       }
       throw new AuthenticationError("You need to be logged in!");
     },
     // add a friend
     addFriend: async (parent, args, context) => {
-        if (context.user) {
-            const friend = await User.findByIdAndUpdate(
-            { _id: args.friendId },
-            { $push: { friends: context.user._id } },
-            { new: true }
-            );
-            await User.findByIdAndUpdate(
-            { _id: context.user._id },
-            { $push: { friends: args.friendId } },
-            { new: true }
-            );
-            return friend;
-        }
-        throw new AuthenticationError("You need to be logged in!");
-      },
+      if (context.user) {
+        const friend = await User.findByIdAndUpdate(
+          { _id: args.friendId },
+          { $push: { friends: context.user._id } },
+          { new: true }
+        );
+        await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $push: { friends: args.friendId } },
+          { new: true }
+        );
+
+        console.log("friend", friend);
+        return friend;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
     // remove a friend
     removeFriend: async (parent, args, context) => {
       if (context.user) {
-        console.log(context.user)
+        console.log(context.user);
         const friend = await User.findByIdAndUpdate(
           { _id: args.friendId },
           { $pull: { friends: context.user._id } },

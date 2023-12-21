@@ -5,7 +5,6 @@ type User {
     email: String!
     friends: [User]
     lists: [List]
-    sentLists: [List]
     receivedLists: [List]
     }
 

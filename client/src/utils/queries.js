@@ -32,17 +32,6 @@ export const QUERY_ME = gql`
                 quantity
               }
             }
-            sentLists {
-              _id
-              name
-              dateCreated
-              items {
-                _id
-                name
-                description
-                quantity
-              }
-            }
           }
         }
     `
@@ -111,17 +100,6 @@ export const QUERY_ME = gql`
                     quantity
                 }
             }
-            sentLists {
-                _id
-                name
-                dateCreated
-                items {
-                    _id
-                    name
-                    description
-                    quantity
-                }
-            }
         }
     }
     `
@@ -147,17 +125,6 @@ export const QUERY_ME = gql`
                 username
             }
             receivedLists {
-                _id
-                name
-                dateCreated
-                items {
-                    _id
-                    name
-                    description
-                    quantity
-                }
-            }
-            sentLists {
                 _id
                 name
                 dateCreated

@@ -41,8 +41,10 @@ const Friends = () => {
         variables: { friendId },
         refetchQueries: [{ query: QUERY_ME }], // Refetch the user data after adding a friend
       });
+      window.location.reload(); // Reload the page to reflect the changes
     } catch (error) {
       console.error("Error adding friend:", error.message);
+      window.location.reload();
     }
   };
 
@@ -51,7 +53,7 @@ const Friends = () => {
       <ProfileNav />
       <div className="friends-area">
         <div className="current-friends">
-          <h2 className="friends-title">Friends</h2>
+          <h2 className="friends-title">Friends ({me.friends.length})</h2>
           {me.friends.map((friend) => (
             <ul key={friend._id} className="friends-list">
               <li>@{friend.username}</li>

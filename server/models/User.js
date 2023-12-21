@@ -30,12 +30,6 @@ const UserSchema = new Schema({
             ref: 'List'
         }
     ],
-    sentLists: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'List'
-        }
-    ],
     friends: [
         {
           type: Schema.Types.ObjectId,
