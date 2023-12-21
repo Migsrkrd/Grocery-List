@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
-import { ADD_ITEM, ADD_LIST } from '../utils/mutations'; // Replace with your actual file path
+import React, { useState, useEffect } from "react";
+import { useMutation } from "@apollo/client";
+import { ADD_ITEM, ADD_LIST } from "../utils/mutations";
 
 const Home = () => {
   const [items, setItems] = useState([]);
-  const [listName, setListName] = useState('');
+  const [listName, setListName] = useState("");
 
   // Mutation hooks
   const [addListMutation] = useMutation(ADD_LIST);
@@ -12,16 +12,27 @@ const Home = () => {
 
   const addInput = () => {
     const newItem = {
-      name: `item ${items.length + 1}`,
-      description: '',
+      name: "", // Set initially as an empty string
+      description: "",
       quantity: 1,
     };
     setItems([...items, newItem]);
   };
-  
+
+  useEffect(() => {
+    // Add at least one input row when the component mounts
+    addInput();
+  }, []);
 
   const removeInput = (index) => {
     const updatedItems = items.filter((_, i) => i !== index);
+    setItems(updatedItems);
+  };
+
+  const handleNameChange = (index, newName) => {
+    const updatedItems = items.map((item, i) =>
+      i === index ? { ...item, name: newName } : item
+    );
     setItems(updatedItems);
   };
 
@@ -38,25 +49,32 @@ const Home = () => {
 
   const handleSave = async () => {
     // Step 1: Create a list
-    const { data: { addList: { _id: listId } } } = await addListMutation({
+    const {
+      data: {
+        addList: { _id: listId },
+      },
+    } = await addListMutation({
       variables: { name: listName },
     });
 
     // Step 2: Create items and associate them with the created list
-    await Promise.all(items.map(async (item) => {
-      await addItemMutation({
-        variables: {
-          listId,
-          name: item.name,
-          description: item.description,
-          quantity: item.quantity,
-        },
-      });
-    }));
+    await Promise.all(
+      items.map(async (item) => {
+        await addItemMutation({
+          variables: {
+            listId,
+            name: item.name,
+            description: item.description,
+            quantity: item.quantity,
+          },
+        });
+      })
+    );
 
     // Optionally, you can reset the state or perform other actions after saving
-    setListName('');
+    setListName("");
     setItems([]);
+    window.location.replace("/dashboard");
   };
 
   return (
@@ -68,21 +86,42 @@ const Home = () => {
 
       {items.map((item, index) => (
         <div key={index}>
-          <p>{item.name}</p>
-          <input type="text" />
+          <p>Item {index + 1}</p>
+          <input
+            type="text"
+            placeholder="Item name"
+            value={item.name}
+            onChange={(e) => handleNameChange(index, e.target.value)}
+          />
           <input
             type="number"
             placeholder="#?"
             value={item.quantity}
-            onChange={(e) => handleQuantityChange(index, parseInt(e.target.value, 10))}
+            onChange={(e) =>
+              handleQuantityChange(index, parseInt(e.target.value, 10))
+            }
           />
-          <button onClick={() => removeInput(index)}>Delete</button>
+          <input
+            type="text"
+            placeholder="Notes"
+            value={item.description}
+            onChange={(e) => {
+              const updatedItems = items.map((item, i) =>
+                i === index ? { ...item, description: e.target.value } : item
+              );
+              setItems(updatedItems);
+            }}
+          />
+          <i
+            onClick={() => removeInput(index)}
+            className="fa fa-trash deletebtn"
+          ></i>
         </div>
       ))}
-
-      <button onClick={addInput}>+</button>
-
-      <button onClick={handleSave}>Save</button>
+      <div className="home-btns">
+        <i onClick={addInput} className="fa-solid fa-plus homebtn"></i>
+        <i className="fa-solid fa-circle-check homebtn" onClick={handleSave}></i>
+      </div>
     </div>
   );
 };

@@ -23,7 +23,25 @@ const UserSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: 'List'
         }
-    ]
+    ],
+    receivedLists: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'List'
+        }
+    ],
+    sentLists: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'List'
+        }
+    ],
+    friends: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'User',
+        },
+      ],
 });
 
 // hash password before saving to database

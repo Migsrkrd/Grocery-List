@@ -35,7 +35,11 @@
 }
 
 .homePage{
-  margin-top: 100px;
+  margin-top: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 body{
@@ -44,6 +48,10 @@ body{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.btn{
+  cursor: pointer;
 }
 
 a{
@@ -99,4 +107,170 @@ h1{
     right: 10px;
     font-size: 20px;
     cursor: pointer;
+  }
+
+  .dashboard{
+    margin-top: 150px;
+  }
+
+  .listSection{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .listRow{
+    width: fit-content;
+    padding: 10px;
+    border: 2px solid var(--border-color);
+    background: var(--background-dark-color);
+    text-align: center;
+    margin: 10px;
+    transition: 0.1s;
+    box-shadow: 0px 3px 8px var(--background-dark-grey);
+  }
+
+
+  .listRow:hover{
+    background: var(--background-light-color-2);
+    scale: 1.1;
+    transition: 0.1s;
+  }
+
+  .listName{
+    font-size: 1.5rem;
+    color: var(--font-light-color);
+  }
+
+  .listWork{
+    font-size: 1rem;
+    color: var(--font-light-color);
+    margin-top: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .item-list{
+    width: 50%;
+
+  }
+
+  .list-item-group{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 10px;
+    border: 2px solid var(--border-color);
+    box-shadow: 0px 3px 8px var(--background-dark-grey);
+  }
+
+  .list-item-group p {
+    text-align: center;
+  }
+
+  .hidden{
+    display: none;
+  }
+
+  .list-link{
+    display: flex;
+  }
+
+  .deletebtn{
+    padding: 10px;
+    font-size: 30px;
+  }
+
+  .deletebtn:hover{
+    scale: 1.3;
+    cursor: pointer;
+    color: red;
+  }
+
+  .homebtn{
+    padding: 10px;
+    font-size: 40px;
+  }
+
+  .homebtn:hover{
+    scale: 1.3;
+    cursor: pointer;
+    color: var(--primary-color);
+  }
+
+  .home-btns{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 30%;
+    margin: 10px;
+  }
+
+  .profile-nav{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    padding: 30px;
+  }
+
+  .profile-nav a{
+    padding:32px;
+  }
+
+  .profile-nav a:hover{
+    color: var(--primary-color);
+  }
+
+  .second-nav{
+    margin-bottom: 100px;
+    border-bottom: 15px solid var(--background-light-color);
+  }
+
+  .active{
+    color: var(--border-color);
+    font-weight: bold;
+    font-size: larger;
+    text-decoration: underline;
+    background: var(--background-light-color);
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+  }
+
+  .friends{
+    margin-top: 150px;
+  }
+
+  .friends-area{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .current-friends{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    border: 3px solid var(--border-color);
+  }
+
+  .friends-title{
+    font-size: 2rem;
+    color: var(--font-light-color);
+    margin: 10px;
+    text-decoration: underline;
+  }
+
+  .friends-list{
+    margin: 10px;
+    list-style:square;
+    text-decoration:wavy;
   }

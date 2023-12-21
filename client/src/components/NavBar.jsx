@@ -24,8 +24,9 @@ const NavBar = () => {
     <div className="navBar">
       {Auth.loggedIn() ? (
         <>
-          <Link to="/dashboard">Dashboard</Link>
-          <h2 onClick={openLogoutModal}>Logout</h2>
+          <h2><Link to="/">Home</Link></h2>
+          <h2><Link to="/dashboard">Dashboard</Link></h2>
+          <h2 className="btn" onClick={openLogoutModal}>Logout</h2>
         </>
       ) : (
         <div>

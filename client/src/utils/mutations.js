@@ -1,7 +1,7 @@
 import {gql} from '@apollo/client';
 
 export const ADD_ITEM = gql`
-    mutation addItem($listId: ID!, $name: String!, $description: String, $quantity: Int) {
+    mutation addItem($listId: String!, $name: String!, $description: String, $quantity: Int!) {
         addItem(listId: $listId, name: $name, description: $description, quantity: $quantity) {
         _id
         name
@@ -17,7 +17,6 @@ export const ADD_LIST = gql`
         _id
         name
         items {
-            _id
             name
             description
             quantity
@@ -50,8 +49,8 @@ export const LOGIN_USER = gql`
     `;
 
 export const REMOVE_ITEM = gql`
-    mutation removeItem($listId: ID!, $itemId: ID!) {
-        removeItem(listId: $listId, itemId: $itemId) {
+    mutation removeItem($itemId: String!, $listId: String!) {
+        removeItem(itemId: $itemId, listId: $listId) {
         _id
         name
         description
@@ -86,6 +85,51 @@ export const SIGNUP_USER = gql`
         }
         }
     }
-    `;
+    `
+    
+    export const SEND_LIST = gql`
+    mutation sendList($listId: ID!, $recipientId: String!) {
+        sendList(listId: $listId, recipientId: $recipientId) {
+        _id
+        name
+        items {
+            _id
+            name
+            description
+            quantity
+        }
+        }
+    }
+    `
+
+    export const ADD_FRIEND = gql`
+    mutation addFriend($friendId: String!) {
+        addFriend(friendId: $friendId) {
+        _id
+        username
+        email
+        friends {
+            _id
+            username
+            email
+        }
+        }
+    }
+    `
+    export const REMOVE_FRIEND = gql`
+    mutation removeFriend($friendId: ID!) {
+        removeFriend(friendId: $friendId) {
+        _id
+        username
+        email
+        friends {
+            _id
+            username
+            email
+        }
+        }
+    }
+    `
+    ;
 
     

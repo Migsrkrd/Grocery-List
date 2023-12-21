@@ -5,17 +5,13 @@ const ListItemSchema = new Schema({
         type: String,
         required: [true, 'Please enter an item name'],
     },
+    description: {
+        type: String,
+        required: false,
+    },
     quantity: {
         type: Number,
         required: [true, 'Please enter a quantity'],
-    },
-    price: {
-        type: Number,
-        required: [true, 'Please enter a price'],
-    },
-    checked: {
-        type: Boolean,
-        required: [true, 'Please enter a checked value'],
     },
     list: {
         type: Schema.Types.ObjectId,
