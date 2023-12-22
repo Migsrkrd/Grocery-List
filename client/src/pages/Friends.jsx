@@ -7,7 +7,7 @@ import { ADD_FRIEND } from "../utils/mutations";
 const Friends = () => {
   // Fetching data using useQuery
   const { loading, error, data } = useQuery(QUERY_ME);
-  const { loading: loadingUsers, error: errorUsers, data: dataUsers } = useQuery(QUERY_USERS);
+  const { loading: loadingUsers, data: dataUsers } = useQuery(QUERY_USERS);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [hasInteracted, setHasInteracted] = useState(false);
@@ -16,7 +16,7 @@ const Friends = () => {
   const [addFriendMutation] = useMutation(ADD_FRIEND);
 
   if (loading || loadingUsers) return <p>Loading...</p>;
-  if (error || errorUsers) return <p>Error: {error?.message || errorUsers?.message}</p>;
+  // if (error || errorUsers) return <p>Error: {error?.message || errorUsers?.message}</p>;
 
   const { me } = data;
 

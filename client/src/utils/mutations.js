@@ -90,16 +90,22 @@ export const SIGNUP_USER = gql`
     export const SEND_LIST = gql`
     mutation sendList($listId: ID!, $recipientId: String!) {
         sendList(listId: $listId, recipientId: $recipientId) {
-        _id
-        name
-        items {
+          _id
+          dateCreated
+          items {
             _id
-            name
             description
+            name
             quantity
+          }
+          name
+          userId
+          sentTo {
+            username
+          }
+          isSent
         }
-        }
-    }
+      }
     `
 
     export const ADD_FRIEND = gql`
@@ -127,6 +133,37 @@ export const SIGNUP_USER = gql`
             username
             email
         }
+        }
+    }
+    `
+
+    export const REMOVE_RECEIVED_LIST = gql`
+    mutation removeReceivedList($listId: ID!, $senderId: ID!) {
+        removeReceivedList(listId: $listId, senderId: $senderId) {
+        _id
+        username
+        email
+        receivedLists {
+            _id
+            name
+            items {
+            _id
+            name
+            description
+            quantity
+            }
+        }
+        }
+    }
+    `
+
+    export const UPDATE_ITEM = gql`
+    mutation updateItem($itemId: ID!, $name: String!, $description: String, $quantity: Int!) {
+        updateItem(itemId: $itemId, name: $name, description: $description, quantity: $quantity) {
+        _id
+        name
+        description
+        quantity
         }
     }
     `

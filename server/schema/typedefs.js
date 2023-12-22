@@ -33,7 +33,7 @@ type List {
 type Query {
     me: User
     users: [User]
-    user(username: String!): User
+    user(userId: ID!): User
     lists: [List]
     list(listId: ID!): List
     items: [Item]
@@ -50,6 +50,8 @@ type Mutation {
     sendList(listId: ID!, recipientId: String!): List
     addFriend(friendId: String!): User
     removeFriend(friendId: ID!): User
+    removeReceivedList(listId: ID!, senderId: ID!): User
+    updateItem(itemId: ID!, name: String, description: String, quantity: Int): Item
     }
     `;
 

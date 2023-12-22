@@ -48,15 +48,23 @@ const SignUp = ({ closeModal }) => {
 
 
     return (
-        <div>
+        <div className='loginModal'>
             <h1>Sign Up</h1>
-            <form onSubmit={handleFormSubmit}>
+            <form className='loginModal' onSubmit={handleFormSubmit}>
+              <div className='emailArea'>
+                <label htmlFor="username">Username:</label>
                 <input type="text" id='username' placeholder="username" onChange={handleInputChange} />
+              </div>
+              <div className='emailArea'>
+                <label htmlFor="email">Email:</label>
                 <input type="text" id='email' placeholder='email' onChange={handleInputChange} />
+              </div>
+              <div className='passwordArea'>
+                <label htmlFor="password">Password:</label>
                 <input type="password" id='password' placeholder="password" onChange={handleInputChange} />
+              </div>
                 <button type="submit">Submit</button>
             </form>
-            <button onClick={closeModal}>Close</button>
         </div>
     );
 

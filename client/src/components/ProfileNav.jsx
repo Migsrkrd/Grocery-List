@@ -19,10 +19,7 @@ const ProfileNav = () => {
           <Link className={isActive("/Friends") ? "active" : ""} to="/Friends">Friends</Link>
         </li>
         <li>
-          <Link className={isActive("/profile/settings") ? "active" : ""} to="/profile/settings">Settings</Link>
-        </li>
-        <li>
-          <Link className={isActive("/profile/notifications") ? "active" : ""} to="/profile/notifications">Notifications</Link>
+          <Link className={isActive("/received") ? "active" : ""} to="/received">Received Lists</Link>
         </li>
       </ul>
     </div>

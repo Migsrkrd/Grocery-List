@@ -9,12 +9,27 @@ const resolvers = {
         return User.findOne({ _id: context.user._id })
           .populate({
             path: "lists",
-            populate: {
+            populate: [
+              {
               path: "items",// Populate the 'items' field within each 'list'
             },
+            {
+              path: "sentTo",
+            },
+            ],
           })
           .populate("friends")
-          .populate("receivedLists");
+          .populate({
+            path: "receivedLists",
+            populate: [
+              {
+                path: "items", // Populate the 'items' field within each 'receivedList'
+              },
+              {
+                path: "userId",
+              }
+            ],
+          })
       }
       throw new Error("You need to be logged in!");
     },
@@ -23,23 +38,49 @@ const resolvers = {
       return User.find()
         .populate({
           path: "lists",
-          populate: {
-            path: "items", // Populate the 'items' field within each 'list'
+          populate: [
+            {
+            path: "items",// Populate the 'items' field within each 'list'
           },
+          {
+            path: "sentTo",
+          },
+          ],
         })
         .populate("friends")
-        .populate("receivedLists");
+        .populate({
+          path: "receivedLists",
+          populate: [
+            {
+              path: "items", // Populate the 'items' field within each 'receivedList'
+            },
+            {
+              path: "userId",
+            }
+          ],
+        });
     },
     // get a user by username
-    user: async (parent, { username }) => {
-      return User.findOne({ username })
+    user: async (parent, { userId }) => {
+      return User.findOne({ _id: userId })
         .populate({
           path: "lists",
           populate: {
             path: "items", // Populate the 'items' field within each 'list'
           },
         })
-        .populate("friends");
+        .populate("friends")
+        .populate({
+          path: "receivedLists",
+          populate: [
+            {
+              path: "items", // Populate the 'items' field within each 'receivedList'
+            },
+            {
+              path: "userId",
+            }
+          ],
+        });
     },
     // get all lists
     lists: async () => {
@@ -51,7 +92,8 @@ const resolvers = {
     list: async (parent, { listId }) => {
       return List.findOne({ _id: listId }).populate({
         path: "items", // Populate the 'items' field within each 'list'
-      });
+      })
+      .populate("sentTo");
     },
     // get all items
     items: async () => {
@@ -148,6 +190,7 @@ const resolvers = {
     // send a list
     sendList: async (parent, args, context) => {
       if (context.user) {
+        const givenGuy = await User.findOne({ _id: args.recipientId });
         // Update the recipient's receivedLists
         const recipient = await User.findByIdAndUpdate(
           { _id: args.recipientId },
@@ -163,7 +206,7 @@ const resolvers = {
               isSent: true,
             },
             $push: {
-              sentTo: recipient,
+              sentTo: givenGuy,
             },
           },
           { new: true }
@@ -207,6 +250,35 @@ const resolvers = {
           { new: true }
         );
         return friend;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    // remove a received list
+    removeReceivedList: async (parent, args, context) => {
+      if (context.user) {
+        const user = await User.findByIdAndUpdate(
+          { _id: context.user._id },
+          { $pull: { receivedLists: args.listId } },
+          { new: true }
+        );
+        const sender = await User.findOneAndUpdate(
+          { _id: args.senderId },
+          { $pull: { lists: args.listId } },
+          { new: true }
+        );
+        return user;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    // update an item
+    updateItem: async (parent, args, context) => {
+      if (context.user) {
+        const item = await Item.findByIdAndUpdate(
+          { _id: args.itemId },
+          { $set: { ...args } },
+          { new: true }
+        );
+        return item;
       }
       throw new AuthenticationError("You need to be logged in!");
     },

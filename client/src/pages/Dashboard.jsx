@@ -26,6 +26,9 @@ const Dashboard = () => {
   // Assuming that data.me.lists contains an array of lists
   const lists = data.me.lists;
 
+  // Sort the lists based on the dateCreated property
+  const sortedLists = [...lists].sort((a, b) => new Date(b.dateCreated) - new Date(a.dateCreated));
+
   const handleRemoveList = async (event, listId) => {
     event.preventDefault();
     event.stopPropagation();
@@ -39,17 +42,20 @@ const Dashboard = () => {
     }
   };
 
-
+  console.log(sortedLists);
 
   return (
     <div className="dashboard">
       <ProfileNav />
       <ul className="listSection">
-        {lists.map((list, index) => (
+        {sortedLists.map((list, index) => (
           <div key={list._id}>
             <Link className="list-link" to={`/dashboard/${list._id}/${index}`}>
               <li className="listRow">
-                <span className="listName">{list.name}</span> | {list.dateCreated} | <span className="hidden">{index}</span> items: {list.items.length} |
+                <span className="listName">{list.name}</span> | {list.dateCreated} | items: {list.items.length} |
+                {list.sentTo && list.sentTo.length > 0 && (
+                  <span className="sentTo">Sent to: @{list.sentTo.map(user => user.username).join(', @')}</span>
+                )}
                 <i className="fa fa-trash deletebtn" onClick={(event) => handleRemoveList(event, list._id)}></i>
               </li>
             </Link>

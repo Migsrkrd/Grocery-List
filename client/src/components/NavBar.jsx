@@ -7,7 +7,6 @@ import { useState } from "react";
 import Login from "./Login";
 
 const NavBar = () => {
-
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isSignUpModalOpen, setSignUpModalOpen] = useState(false);
   const [isLogoutModalOpen, setLogoutModalOpen] = useState(false);
@@ -20,16 +19,32 @@ const NavBar = () => {
   const closeLogoutModal = () => setLogoutModalOpen(false);
   const closeLogInModal = () => setLogInModalOpen(false);
 
+  const myName = () => {
+    if (Auth.loggedIn()) {
+      const name = Auth.getProfile().data.username;
+      return name;
+    } else {
+      return " ";
+    }
+  }
+  // console.log(myName);
+
   return (
     <div className="navBar">
       {Auth.loggedIn() ? (
         <>
-          <h2><Link to="/">Home</Link></h2>
-          <h2><Link to="/dashboard">Dashboard</Link></h2>
-          <h2 className="btn" onClick={openLogoutModal}>Logout</h2>
+          <h2 className="btn">
+            <Link to="/">Make a List!</Link>
+          </h2>
+          <h2 className="btn">
+            <Link to="/dashboard">{myName()}</Link>
+          </h2>
+          <h2 className="btn" onClick={openLogoutModal}>
+            Logout
+          </h2>
         </>
       ) : (
-        <div>
+        <div className="notLoggedIn">
           <h2 onClick={openLogInModal}>Login</h2>
           <h2 onClick={openSignUpModal}>Signup</h2>
         </div>
@@ -38,9 +53,13 @@ const NavBar = () => {
         <SignUp closeModal={closeSignUpModal} />
       </Modal>
       <Modal isOpen={isLogoutModalOpen} closeModal={closeLogoutModal}>
-        <h1>Are you sure you want to logout?</h1>
-        <button onClick={Auth.logout}>Yes</button>
-        <button onClick={closeLogoutModal}>No</button>
+        <div className="logoutModal">
+          <h1>Are you sure you want to logout?</h1>
+          <div className="logoutBtns">
+            <button onClick={Auth.logout}>Logout</button>
+            <button onClick={closeLogoutModal}>Cancel</button>
+          </div>
+        </div>
       </Modal>
       <Modal isOpen={isLogInModalOpen} closeModal={closeLogInModal}>
         <Login closeModal={closeLogInModal} />

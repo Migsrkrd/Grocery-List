@@ -3,37 +3,47 @@ import {gql} from '@apollo/client';
 export const QUERY_ME = gql`
     query me {
         me {
+          friends {
             _id
             email
-            lists {
-              dateCreated
-              name
-              _id
-              items {
-                _id
-                description
-                name
-                quantity
-              }
-            }
             username
-            friends {
-              _id
-              username
-            }
-            receivedLists {
+          }
+          _id
+          username
+          email
+          receivedLists {
+            _id
+            userId
+            name
+            isSent
+            dateCreated
+            items {
               _id
               name
-              dateCreated
-              items {
-                _id
-                name
-                description
-                quantity
-              }
+              description
+              quantity
+            }
+          }
+          lists {
+            _id
+            dateCreated
+            isSent
+            name
+            userId
+            sentTo {
+              username
+              _id
+              email
+            }
+            items {
+              _id
+              description
+              name
+              quantity
             }
           }
         }
+      }
     `
     
     export const QUERY_LISTS = gql`
@@ -69,8 +79,8 @@ export const QUERY_ME = gql`
     `
     
     export const QUERY_USER = gql`
-    query user($username: String!) {
-        user(username: $username) {
+    query user($userId: ID!) {
+        user(userId: $userId) {
             _id
             username
             email
@@ -106,35 +116,9 @@ export const QUERY_ME = gql`
     export const QUERY_USERS = gql`
     query users {
         users {
-            _id
-            username
-            email
-            lists {
-                _id
-                name
-                dateCreated
-                items {
-                    _id
-                    name
-                    description
-                    quantity
-                }
-            }
-            friends {
-                _id
-                username
-            }
-            receivedLists {
-                _id
-                name
-                dateCreated
-                items {
-                    _id
-                    name
-                    description
-                    quantity
-                }
-            }
+          _id
+          email
+          username
         }
-    }
+      }
     `;

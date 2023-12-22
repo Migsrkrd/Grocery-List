@@ -7,6 +7,8 @@ import Home from "./pages/Home";
 import Dashboard from "./pages/Dashboard";
 import ListWork from "./pages/ListWork";
 import Friends from "./pages/Friends";
+import Received from "./pages/Received";
+import ReceivedWork from './pages/ReceivedWork';
 
 const router = createBrowserRouter([
     {
@@ -29,7 +31,15 @@ const router = createBrowserRouter([
             {
                 path: "/friends",
                 element: <Friends />
-            }
+            }, 
+            {
+                path: "/received",
+                element: <Received />
+            }, 
+            {
+                path: "/received/:id/:index",
+                element: <ReceivedWork />
+            },
         ]
     }
 ]);
