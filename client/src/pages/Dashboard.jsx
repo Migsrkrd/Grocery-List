@@ -52,7 +52,7 @@ const Dashboard = () => {
           <div key={list._id}>
             <Link className="list-link" to={`/dashboard/${list._id}/${index}`}>
               <li className="listRow">
-                <span className="listName">{list.name}</span> | {list.dateCreated} | items: {list.items.length} |
+                <span className="listName">{list.name}</span> | {list.dateCreated} | items: {list.items.length} 
                 {list.sentTo && list.sentTo.length > 0 && (
                   <span className="sentTo">Sent to: @{list.sentTo.map(user => user.username).join(', @')}</span>
                 )}

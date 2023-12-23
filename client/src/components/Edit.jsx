@@ -56,7 +56,7 @@ const Edit = (data) => {
         }
       }
     }
-    window.location.assign(`/dashboard/${param.id}/${param.index}`);
+    window.location.reload();
   };
 
   return (

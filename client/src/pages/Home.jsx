@@ -81,19 +81,26 @@ const Home = () => {
   return (
     <div className="homePage">
       {Auth.loggedIn() ? (
-        <div className="homePage">
+        <div className="homePage-content">
           <h3>Where to?</h3>
-          <input type="text" value={listName} onChange={handleListNameChange} />
+          <input
+            type="text"
+            value={listName}
+            onChange={handleListNameChange}
+            className="whereTo"
+          />
           {items.map((item, index) => (
-            <div key={index}>
+            <div key={index} className="inputs-Area">
               <p>Item {index + 1}</p>
               <input
+                className="itemInput"
                 type="text"
                 placeholder="Item name"
                 value={item.name}
                 onChange={(e) => handleNameChange(index, e.target.value)}
               />
               <input
+                className="quantityInput"
                 type="number"
                 placeholder="#?"
                 value={item.quantity}
@@ -102,6 +109,7 @@ const Home = () => {
                 }
               />
               <input
+                className="notesInput"
                 type="text"
                 placeholder="Notes"
                 value={item.description}

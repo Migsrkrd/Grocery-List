@@ -35,7 +35,15 @@
 }
 
 .homePage{
-  margin-top: 150px;
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.homePage-content{
+  margin-top: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -152,7 +160,6 @@ h1{
     width: 100%;
     display: flex;
     flex-direction: column;
-    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
   }
@@ -177,7 +184,7 @@ h1{
 
   .listName{
     font-size: 1.5rem;
-    color: var(--font-light-color);
+    color: white;
   }
 
   .listWork{
@@ -285,8 +292,13 @@ h1{
   .friends-area{
     display: flex;
     justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
+    align-items: baseline;
+  }
+
+  .current-friends h2{
+    margin: 10px;
+    color: var(--primary-color);
+    text-decoration: underline;
   }
 
   .current-friends{
@@ -295,6 +307,12 @@ h1{
     justify-content: center;
     align-items: left;
     border: 3px solid var(--border-color);
+    border-radius: 10px;
+    padding: 20px;
+    background: var(--background-light-color);
+    color: var(--font-dark-color-2);
+    float: left;
+    max-height: fit-content;
   }
 
   .friends-title{
@@ -304,10 +322,13 @@ h1{
     text-decoration: underline;
   }
 
-  .friends-list{
-    margin: 10px;
+  .friends-list li{
     list-style:square;
     text-decoration:wavy;
+    border-bottom: 1px solid var(--border-color);
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
+    padding: 10px;
   }
 
   .sentTo{
@@ -505,3 +526,382 @@ h1{
     font-size: 1.5rem;
     text-decoration: underline;
   }
+
+  .sentby{
+    color: var(--primary-color);
+  }
+
+  .search-results{
+    display: flex;
+    justify-content: center;
+    align-items: left;
+    flex-direction: column;
+    background: white;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+
+  .search-result{
+    border-bottom: 1px solid var(--border-color);
+    color: var(--font-dark-color-2);
+    padding: 5px;
+    width: 600px;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-result:hover{
+    cursor: pointer;
+    background: var(--background-light-color-2);
+  }
+
+  .search-username{
+    color: var(--primary-color);
+  }
+
+  .addfriend{
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    padding: 5px;
+    margin-left: 5px;
+  }
+
+  .addfriend:hover{
+    cursor: pointer;
+    background: var(--primary-color);
+    color: white;
+  }
+
+  .search-friends{
+    padding: 5px;
+    border: none;
+    width: 600px;
+  }
+
+  .search-friends:hover{
+    cursor:text;
+  }
+
+  .search-friends:focus{
+    outline: none;
+  }
+
+  .search-friends::placeholder{
+    color: var(--font-dark-color-2);
+  }
+
+  .search-friends{
+    border-bottom: 1px solid var(--border-color);
+    color: var(--font-dark-color-2);
+    padding: 5px;
+    width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .friend-list{
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .friends-list li{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .first-item{
+    background: red;
+  }
+
+  .remfriend{
+    color: red;
+    padding: 5px;
+    margin-left: 5px;
+  }
+
+  .remfriend:hover{
+    cursor: pointer;
+    background: red;
+    color: white;
+  }
+
+  .whereTo{
+    background-color: var(--background-dark-color);
+    border: 2px solid var(--font-light-color);
+    color: var(--font-light-color);
+    line-height: 1.5;
+    border-radius: 10px;
+    margin-top: 10px;
+    padding: 5px;
+    max-width: 100%;
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 20px;
+  }
+
+  .whereTo:hover{
+    background: var(--background-light-color-2);
+    scale: 1.1;
+    transition: 0.1s;
+    color: var(--font-light-color);
+  }
+
+  .whereTo:focus{
+    border-color: #007bff;
+  }
+
+  .itemInput{
+    background-color: var(--background-dark-color);
+    border: 2px solid var(--font-light-color);
+    color: var(--font-light-color);
+    line-height: 1.5;
+    margin: 10px;
+    padding: 5px;
+    max-width: 100%;
+  }
+
+  .itemInput:hover{
+    scale: 1.1;
+    transition: 0.1s;
+    color: var(--font-light-color);
+  }
+
+  .notesInput{
+    background-color: var(--background-dark-color);
+    border: 2px solid var(--font-light-color);
+    color: var(--font-light-color);
+    line-height: 1.5;
+    margin: 10px;
+    padding: 5px;
+    max-width: 100%;
+  }
+
+  .notesInput:hover{
+    scale: 1.1;
+    transition: 0.1s;
+    color: var(--font-light-color);
+  }
+
+  .quantityInput{
+    background-color: var(--background-dark-color);
+    border: 2px solid var(--font-light-color);
+    color: var(--font-light-color);
+    line-height: 1.5;
+    margin: 10px;
+    padding: 5px;
+    max-width: 7%;
+    text-align: center;
+
+  }
+
+  .inputs-Area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .quantityInput:hover{
+    scale: 1.1;
+    transition: 0.1s;
+    color: var(--font-light-color);
+  }
+
+  @media screen and (max-width: 390px){
+    :root{
+      max-width: 390px;
+    }
+
+    body{
+      max-width: 390px;
+    }
+
+    .home-info{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      border-right: none;
+      border-left: none;
+      margin: 8%;
+    }
+    #welcome-section h1{
+      font-size: 40px;
+    }
+
+    #authentication-section h2{
+      font-size: 25px;
+    }
+
+    #authentication-section p{
+      font-size: 14px;
+    }
+
+    .modal-content{
+      min-width: 200px;
+      min-height: 200px;
+      max-height: 400px;
+      max-width: 350px;
+    }
+
+    .homePage-content{
+      margin-top: 50px;
+      max-width: 390px;
+      margin-bottom: 100px;
+    }
+
+    .navBar{
+      max-width: 390px;
+    }
+
+    .inputs-Area{
+      max-width: 390px;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: left;
+      border: 2px solid var(--border-color);
+      margin: 10px;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    .inputs-Area i{
+      color: red;
+    }
+
+    .inputs-Area i:hover{
+      color: var(--primary-color);
+    }
+
+    .inputs-Area p{
+      font-weight: bold;
+    }
+
+    .whereTo:hover{
+      background: none;
+      scale: 1.1;
+      transition: 0.1s;
+      color: var(--font-light-color);
+      border:2px solid var(--primary-color);
+    }
+
+    .quantityInput{
+      max-width: 20%;
+    }
+
+    .profile-nav{
+      max-width: 390px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-top: 2px solid var(--border-color);
+      border-bottom: 2px solid var(--border-color);
+      margin-top: 90px;
+    }
+
+    .profile-nav a{
+      padding: 10px;
+    }
+
+    .profile-nav li{
+      margin: 10px;
+      
+    }
+
+    .second-nav{
+      max-width: 390px;
+      border-bottom: none;
+      /* border-right: 5px solid var(--background-light-color); */
+      margin-bottom: 50px;
+    }
+
+    li .active{
+      width: 100%;
+      background: none;
+      border: 2px solid var(--primary-color);
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      color: var(--primary-color);
+    }
+
+    .deletebtn{
+      color: red;
+    }
+
+    .dashboard{
+      margin-top: 0px;
+      margin-bottom: 100px;
+    }
+
+
+    .listRow{
+      max-width: 300px;
+      margin: none;
+      display: flex;
+      border-radius: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .listName{
+      font-size: 1.5rem;
+      color: white;
+      margin: 10px;
+    }
+    
+    .friends{
+      margin-top: 0px;
+      margin-bottom: 100px;
+      max-width: 390px;
+      flex-direction: column;
+    }
+
+    .current-friends{
+      max-width: 390px;
+      float: none;
+      font-size: medium;
+    }
+
+    .friends-area{
+      max-width: 390px;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .search-friends{
+      max-width: 370px;
+      justify-content: center;
+      align-items: center;
+      padding: 10;
+    }
+
+    .search-results{
+      max-width: 390px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    li.search-result{
+      max-width: 370px;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      font-size: medium;
+    }
+
+    .searching-friends{
+      max-width: 390px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    .listUser{
+      display: flex;
+      align-items: center;
+    }
+  }
+

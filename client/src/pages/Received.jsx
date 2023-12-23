@@ -36,7 +36,6 @@ const Received = () => {
       await removeList({
         variables: { listId: listId },
       });
-      alert("List removed!");
     } catch (e) {
       console.error(e);
     }
@@ -53,15 +52,15 @@ const Received = () => {
             <div key={list._id}>
               <Link className="list-link" to={`/received/${list._id}/${index}`}>
                 <li className="listRow">
-                  <span className="listName">{list.name}</span> | {list.dateCreated} | items: {list.items.length} |
+                  <span className="listName">{list.name}</span> | {list.dateCreated} | items: {list.items.length} 
                   {list.sentTo && list.sentTo.length > 0 && (
                     <span className="sentTo">
                       Sent to: @{list.sentTo.map((user) => user.username).join(", ")}
                     </span>
                   )}
                   {list.userId && (
-                    <span className="listUser">
-                      Sent by:{" "}
+                    <span className="listUser sentby">
+                      Sent by: @{""}
                       <QueryUserComponent userId={list.userId} />
                     </span>
                   )}

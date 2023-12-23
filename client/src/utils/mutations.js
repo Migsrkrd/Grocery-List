@@ -114,11 +114,6 @@ export const SIGNUP_USER = gql`
         _id
         username
         email
-        friends {
-            _id
-            username
-            email
-        }
         }
     }
     `
@@ -128,11 +123,6 @@ export const SIGNUP_USER = gql`
         _id
         username
         email
-        friends {
-            _id
-            username
-            email
-        }
         }
     }
     `

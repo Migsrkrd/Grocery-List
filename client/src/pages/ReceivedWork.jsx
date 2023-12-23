@@ -31,7 +31,6 @@ const ReceivedWork = () => {
       await removeItem({
         variables: { itemId: itemId, listId: listId },
       });
-      alert("Item removed!");
     } catch (e) {
       console.error(e);
     }
