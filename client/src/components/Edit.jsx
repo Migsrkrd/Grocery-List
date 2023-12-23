@@ -15,8 +15,8 @@ const Edit = (data) => {
   const handleAddInputs = () => {
     setItems((prevItems) => {
       const newItem = {
-        name: "new Item",
-        description: "new item description",
+        name: "",
+        description: "",
         quantity: 1,
         isRemoved: false,
       };
@@ -26,16 +26,22 @@ const Edit = (data) => {
 
   const handleRemoveInputs = (index) => {
     setItems((prevItems) =>
-      prevItems.map((item, i) =>
-        i === index ? { ...item, isRemoved: true } : item
-      ).filter((item) => !item.isRemoved)
+      prevItems
+        .map((item, i) => (i === index ? { ...item, isRemoved: true } : item))
+        .filter((item) => !item.isRemoved)
     );
   };
 
   const handleSave = async () => {
     for (const item of items) {
       if (!item.isRemoved) {
-        if (ListData.items.some((originalItem) => originalItem._id === item._id)) {
+        if (item.name === "" || item.name === null) {
+          alert("All items must have a name!");
+          return;
+        }
+        if (
+          ListData.items.some((originalItem) => originalItem._id === item._id)
+        ) {
           await updateItem({
             variables: {
               itemId: item._id,
@@ -70,8 +76,10 @@ const Edit = (data) => {
       {items.map((item, index) => (
         <div key={index} className="list-item-group">
           {!item.isRemoved && (
-            <>
+            <div className="edit-input-area">
+              <p>item {index + 1}</p>
               <input
+                placeholder="Item Name"
                 value={item.name}
                 onChange={(e) => {
                   const updatedItems = [...items];
@@ -90,29 +98,34 @@ const Edit = (data) => {
               />
               {!item.isRemoved && (
                 <input
+                  placeholder="Description"
                   value={item.description}
                   onChange={(e) => {
                     const updatedItems = [...items];
-                    updatedItems[index] = { ...item, description: e.target.value };
+                    updatedItems[index] = {
+                      ...item,
+                      description: e.target.value,
+                    };
                     setItems(updatedItems);
                   }}
                 />
               )}
-              <h2 onClick={() => handleRemoveInputs(index)}><i className="fa fa-trash deletebtn"></i></h2>
-            </>
+              <h2 onClick={() => handleRemoveInputs(index)}>
+                <i className="fa fa-trash deletebtn"></i>
+              </h2>
+            </div>
           )}
         </div>
       ))}
       <div className="home-btns">
         <i className="fa-solid fa-plus homebtn" onClick={handleAddInputs}></i>
-        <i className="fa-solid fa-circle-check homebtn" onClick={handleSave}></i>
+        <i
+          className="fa-solid fa-circle-check homebtn"
+          onClick={handleSave}
+        ></i>
       </div>
     </div>
   );
 };
 
 export default Edit;
-
-
-
-

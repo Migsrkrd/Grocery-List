@@ -3,6 +3,7 @@ import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@ap
 import { setContext } from '@apollo/client/link/context';
 import { Outlet } from 'react-router-dom';
 import NavBar from './components/NavBar';
+import Footer from './components/Footer';
 
 
 const httpLink = createHttpLink({
@@ -31,6 +32,7 @@ function App() {
         <ApolloProvider client={client}>
             <NavBar />
         <Outlet />
+        <Footer />
     </ApolloProvider>
     );
 }

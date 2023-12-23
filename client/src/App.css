@@ -26,12 +26,33 @@
   font-size: 1.1rem;
 }
 
-.hometitle{
-  font-size: 3rem;
-  color: var(--white-color);
-  span{
-    font-size: 3rem;
-  }
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #f8f8f8; /* Add your desired background color */
+  padding: 10px;
+  text-align: center;
+  z-index: 1;
+  background: var(--background-dark-grey);
+  /* Add any other styling you want for your footer */
+}
+
+.footer-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.footer-section {
+  flex: 1;
+  text-align: center;
+}
+
+.footer-bottom {
+  margin-top: 10px;
 }
 
 .homePage{
@@ -48,6 +69,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: 10px;
 }
 
 body{
@@ -56,6 +78,7 @@ body{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-bottom: 300px;
 }
 
 .btn{
@@ -77,9 +100,6 @@ a{
 h1{
   font-size: 4rem;
   color: var(--white-color);
-  span{
-    font-size: 4rem;
-  }
 }
 
 .navBar{
@@ -154,6 +174,7 @@ h1{
 
   .dashboard{
     margin-top: 150px;
+    z-index: 2;
   }
 
   .listSection{
@@ -227,12 +248,20 @@ h1{
   .deletebtn{
     padding: 10px;
     font-size: 30px;
+    color: var(--font-light-color);
   }
 
   .deletebtn:hover{
     scale: 1.3;
     cursor: pointer;
     color: red;
+  }
+
+  .edit-input-area{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--font-dark-color-2);
   }
 
   .homebtn{
@@ -283,6 +312,10 @@ h1{
     background: var(--background-light-color);
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
+  }
+
+  .border-top{
+    border-top: 1px solid var(--border-color);
   }
 
   .friends{
@@ -714,6 +747,7 @@ h1{
 
     body{
       max-width: 390px;
+      margin-bottom: 100px;
     }
 
     .home-info{
@@ -728,6 +762,7 @@ h1{
     #welcome-section h1{
       font-size: 40px;
     }
+
 
     #authentication-section h2{
       font-size: 25px;
@@ -903,5 +938,58 @@ h1{
       display: flex;
       align-items: center;
     }
+
+    .listWork h1{
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    .item-list{
+      max-width: 390px;
+      width: 90%;
+    }
+
+    .list-item-group{
+      max-width: 390px;
+    }
+
+    .list-item-group p {
+      text-align: center;
+    }
+
+    .homebtn{
+      padding: 10px;
+      font-size: 30px;
+      color: var(--primary-color);
+    }
+
+    .edit-input-area{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--font-dark-color-2);
+      flex-direction: column;
+    }
+
+    .edit-input-area input{
+      margin-top: 5px;
+      line-height: 1.5;
+    }
+
+    .edit-input-area p{
+      margin: 10px;
+    }
+
+    .footer-section p, .footer-section a{
+      max-width: 390px;
+      font-size: 12px;
+    }
+
+    .footer-section h2, .footer-bottom p{ 
+      max-width: 390px;
+      font-size: 14px;
+    }
+
+    
   }
 

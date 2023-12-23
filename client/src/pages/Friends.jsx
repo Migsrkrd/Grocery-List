@@ -70,8 +70,10 @@ const Friends = () => {
       <div className="friends-area">
         <div className="current-friends">
           <h2 className="friends-title">Friends ({me.friends.length})</h2>
+          <p className="border-top"></p>
           {me.friends.map((friend) => (
             <ul key={friend._id} className="friends-list">
+              
               <li>
                 @{friend.username}
                 <i onClick={() => handleRemoveFriend(friend._id)} className="fa-solid fa-x remfriend"></i>
