@@ -34,7 +34,6 @@ footer {
   background-color: #f8f8f8; /* Add your desired background color */
   padding: 10px;
   text-align: center;
-  z-index: 1;
   background: var(--background-dark-grey);
   /* Add any other styling you want for your footer */
 }
@@ -283,6 +282,14 @@ h1{
     margin: 10px;
   }
 
+  .home-buttons-again{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin: 10px;
+  }
+
   .profile-nav{
     display: flex;
     width: 100%;
@@ -403,6 +410,12 @@ h1{
     align-items: center;
     flex-direction: column;
     color: var(--font-dark-color-2);
+  }
+
+  .edit-title{
+    color: var(--primary-color);
+    font-size: 200%;
+    text-align: center;
   }
 
   .emailArea{
@@ -549,11 +562,12 @@ h1{
     width: 80%;
   }
 
-  .home-info div p{
+  .home-info div p {
     margin: 10px;
+    font-size: 17px;
   }
-
-  .home-info div h2{
+  
+  .home-info div h2 {
     margin: 10px;
     color: var(--primary-color);
     font-size: 1.5rem;
@@ -763,15 +777,6 @@ h1{
       font-size: 40px;
     }
 
-
-    #authentication-section h2{
-      font-size: 25px;
-    }
-
-    #authentication-section p{
-      font-size: 14px;
-    }
-
     .modal-content{
       min-width: 200px;
       min-height: 200px;
@@ -969,11 +974,15 @@ h1{
       align-items: center;
       color: var(--font-dark-color-2);
       flex-direction: column;
+      max-width: 100%;
     }
 
     .edit-input-area input{
       margin-top: 5px;
       line-height: 1.5;
+      text-align: center;
+      width: fit-content;
+      max-width: 100%;
     }
 
     .edit-input-area p{
@@ -992,4 +1001,522 @@ h1{
 
     
   }
+
+  @media screen and (max-width: 430px) {
+    :root {
+      max-width: 430px;
+    }
+  
+    body {
+      max-width: 430px;
+      margin-bottom: 100px;
+    }
+  
+    .home-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      border-right: none;
+      border-left: none;
+      margin: 8%;
+    }
+  
+    #welcome-section h1 {
+      font-size: 40px;
+    }
+  
+    .home-info div h2 {
+      margin: 10px;
+      color: var(--primary-color);
+      font-size: 1.4rem;
+      text-decoration: underline;
+    }
+
+    .home-info div p {
+      margin: 14px;
+      font-size: 15px;
+    }
+  
+    .modal-content {
+      min-width: 200px;
+      min-height: 200px;
+      max-height: 400px;
+      max-width: 350px;
+    }
+  
+    .homePage-content {
+      margin-top: 50px;
+      max-width: 430px;
+      margin-bottom: 100px;
+    }
+  
+    .navBar {
+      max-width: 430px;
+    }
+  
+    .inputs-Area {
+      max-width: 430px;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: left;
+      border: 2px solid var(--border-color);
+      margin: 10px;
+      padding: 10px;
+      border-radius: 10px;
+    }
+  
+    .inputs-Area i {
+      color: red;
+    }
+  
+    .inputs-Area i:hover {
+      color: var(--primary-color);
+    }
+  
+    .inputs-Area p {
+      font-weight: bold;
+    }
+  
+    .whereTo:hover {
+      background: none;
+      scale: 1.1;
+      transition: 0.1s;
+      color: var(--font-light-color);
+      border: 2px solid var(--primary-color);
+    }
+  
+    .quantityInput {
+      max-width: 20%;
+    }
+  
+    .profile-nav {
+      max-width: 430px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-top: 2px solid var(--border-color);
+      border-bottom: 2px solid var(--border-color);
+      margin-top: 90px;
+    }
+  
+    .profile-nav a {
+      padding: 10px;
+    }
+  
+    .profile-nav li {
+      margin: 10px;
+    }
+  
+    .second-nav {
+      max-width: 430px;
+      border-bottom: none;
+      /* border-right: 5px solid var(--background-light-color); */
+      margin-bottom: 50px;
+    }
+  
+    li .active {
+      width: 100%;
+      background: none;
+      border: 2px solid var(--primary-color);
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      color: var(--primary-color);
+    }
+  
+    .deletebtn {
+      color: red;
+    }
+  
+    .dashboard {
+      margin-top: 0px;
+      margin-bottom: 100px;
+    }
+  
+    .listRow {
+      max-width: 300px;
+      margin: none;
+      display: flex;
+      border-radius: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  
+    .listName {
+      font-size: 1.5rem;
+      color: white;
+      margin: 10px;
+    }
+  
+    .friends {
+      margin-top: 0px;
+      margin-bottom: 100px;
+      max-width: 430px;
+      flex-direction: column;
+    }
+  
+    .current-friends {
+      max-width: 430px;
+      float: none;
+      font-size: medium;
+    }
+  
+    .friends-area {
+      max-width: 430px;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .search-friends {
+      max-width: 370px;
+      justify-content: center;
+      align-items: center;
+      padding: 10;
+    }
+  
+    .search-results {
+      max-width: 430px;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    li.search-result {
+      max-width: 370px;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+      font-size: medium;
+    }
+  
+    .searching-friends {
+      max-width: 430px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 30px;
+    }
+  
+    .listUser {
+      display: flex;
+      align-items: center;
+    }
+  
+    .listWork h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+  
+    .item-list {
+      max-width: 430px;
+      width: 90%;
+    }
+  
+    .list-item-group {
+      max-width: 430px;
+    }
+  
+    .list-item-group p {
+      text-align: center;
+    }
+  
+    .homebtn {
+      padding: 10px;
+      font-size: 30px;
+      color: var(--primary-color);
+    }
+  
+    .edit-input-area {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--font-dark-color-2);
+      flex-direction: column;
+      max-width: 100%;
+    }
+  
+    .edit-input-area input {
+      margin-top: 5px;
+      line-height: 1.5;
+      text-align: center;
+      width: fit-content;
+      max-width: 100%;
+    }
+  
+    .edit-input-area p {
+      margin: 10px;
+    }
+  
+    .footer-section p,
+    .footer-section a {
+      max-width: 430px;
+      font-size: 12px;
+    }
+  
+    .footer-section h2,
+    .footer-bottom p {
+      max-width: 430px;
+      font-size: 14px;
+    }
+  }
+  
+  @media screen and (max-width: 360px) {
+    :root {
+      max-width: 360px;
+    }
+  
+    body {
+      max-width: 360px;
+      margin-bottom: 100px;
+    }
+  
+    .home-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      border-right: none;
+      border-left: none;
+      margin: 8%;
+    }
+  
+    #welcome-section h1 {
+      font-size: 35px;
+    }
+  
+   .home-info div h2 {
+      margin: 10px;
+      color: var(--primary-color);
+      font-size: 1.3rem;
+      text-decoration: underline;
+    }
+
+    .home-info div p {
+      margin: 10px;
+      font-size: 15px;
+    }
+  
+    .modal-content {
+      min-width: 180px;
+      min-height: 180px;
+      max-height: 360px;
+      max-width: 320px;
+    }
+  
+    .homePage-content {
+      margin-top: 40px;
+      max-width: 360px;
+      margin-bottom: 80px;
+    }
+  
+    .navBar {
+      max-width: 360px;
+    }
+  
+    .inputs-Area {
+      max-width: 360px;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: left;
+      border: 2px solid var(--border-color);
+      margin: 8px;
+      padding: 8px;
+      border-radius: 8px;
+    }
+  
+    .inputs-Area i {
+      color: red;
+    }
+  
+    .inputs-Area i:hover {
+      color: var(--primary-color);
+    }
+  
+    .inputs-Area p {
+      font-weight: bold;
+    }
+  
+    .whereTo:hover {
+      background: none;
+      scale: 1.1;
+      transition: 0.1s;
+      color: var(--font-light-color);
+      border: 2px solid var(--primary-color);
+    }
+  
+    .quantityInput {
+      max-width: 18%;
+    }
+  
+    .profile-nav {
+      max-width: 360px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-top: 2px solid var(--border-color);
+      border-bottom: 2px solid var(--border-color);
+      margin-top: 80px;
+    }
+  
+    .profile-nav a {
+      padding: 8px;
+    }
+  
+    .profile-nav li {
+      margin: 8px;
+    }
+  
+    .second-nav {
+      max-width: 360px;
+      border-bottom: none;
+      margin-bottom: 40px;
+    }
+  
+    li .active {
+      width: 100%;
+      background: none;
+      border: 2px solid var(--primary-color);
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+      color: var(--primary-color);
+    }
+  
+    .deletebtn {
+      color: red;
+    }
+  
+    .dashboard {
+      margin-top: 0px;
+      margin-bottom: 80px;
+    }
+  
+    .listRow {
+      max-width: 260px;
+      margin: none;
+      display: flex;
+      border-radius: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  
+    .listName {
+      font-size: 1.3rem;
+      color: white;
+      margin: 8px;
+    }
+  
+    .friends {
+      margin-top: 0px;
+      margin-bottom: 80px;
+      max-width: 360px;
+      flex-direction: column;
+    }
+  
+    .current-friends {
+      max-width: 360px;
+      float: none;
+      font-size: small;
+    }
+  
+    .friends-area {
+      max-width: 360px;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .search-friends {
+      max-width: 320px;
+      justify-content: center;
+      align-items: center;
+      padding: 8px;
+    }
+  
+    .search-results {
+      max-width: 360px;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    li.search-result {
+      max-width: 320px;
+      justify-content: center;
+      align-items: center;
+      padding: 8px;
+      font-size: small;
+    }
+  
+    .searching-friends {
+      max-width: 360px;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+  
+    .listUser {
+      display: flex;
+      align-items: center;
+    }
+  
+    .listWork h1 {
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+  
+    .item-list {
+      max-width: 360px;
+      width: 85%;
+    }
+  
+    .list-item-group {
+      max-width: 360px;
+    }
+  
+    .list-item-group p {
+      text-align: center;
+    }
+  
+    .homebtn {
+      padding: 8px;
+      font-size: 28px;
+      color: var(--primary-color);
+    }
+  
+    .edit-input-area {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--font-dark-color-2);
+      flex-direction: column;
+      max-width: 100%;
+    }
+  
+    .edit-input-area input {
+      margin-top: 5px;
+      line-height: 1.5;
+      text-align: center;
+      max-width: 100%;
+      /* width: fit-content; */
+    }
+  
+    .edit-input-area p {
+      margin: 8px;
+    }
+  
+    .footer-section p,
+    .footer-section a {
+      max-width: 360px;
+      font-size: 10px;
+    }
+  
+    .footer-section h2,
+    .footer-bottom p {
+      max-width: 360px;
+      font-size: 12px;
+    }
+  }
+  
 

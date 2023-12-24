@@ -19,9 +19,6 @@ const Footer = () => {
       <p><a href="#">Privacy Policy</a></p>
     </div>
   </div>
-  <div className="footer-bottom">
-    <p>&copy; 2023 Grocease. All rights reserved.</p>
-  </div>
 </footer>
   );
 }

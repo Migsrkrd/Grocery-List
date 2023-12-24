@@ -4,8 +4,6 @@ import Auth from "../utils/auth";
 import { useState } from "react";
 
 const Login = ({ closeModal }) => {
-  const openLogInModal = () => setLogInModalOpen(true);
-  const closeLogInModal = () => setLogInModalOpen(false);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,10 +12,21 @@ const Login = ({ closeModal }) => {
     variables: { email: email, password: password },
   });
 
-  console.log("login", email, password);
-
   const handleLogIn = async (event) => {
     event.preventDefault();
+    if (!email || !password) {
+      alert("Please fill out all fields");
+      return;
+    } else if (!email.includes("@")) {
+      alert("Please enter a valid email");
+      return;
+    } else if (!email) {
+      alert("Please enter an email");
+      return;
+    } else if (!password) {
+      alert("Please enter a password");
+      return;
+    }
     try {
       const { data } = await login({
         variables: { email: email, password: password },
@@ -26,6 +35,7 @@ const Login = ({ closeModal }) => {
       Auth.login(data.login.token);
     } catch (e) {
       console.error(e);
+      alert("Incorrect email or password");
     }
   };
 

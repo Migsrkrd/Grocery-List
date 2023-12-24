@@ -67,11 +67,11 @@ const Edit = (data) => {
 
   return (
     <div>
-      <h2>{ListData.name}</h2>
+      <h2 className="edit-title">{ListData.name}</h2>
       <div className="list-item-group">
         <h3>Items</h3>
         <h3>Quantity</h3>
-        <h3>Description</h3>
+        <h3>Notes</h3>
       </div>
       {items.map((item, index) => (
         <div key={index} className="list-item-group">
@@ -98,7 +98,7 @@ const Edit = (data) => {
               />
               {!item.isRemoved && (
                 <input
-                  placeholder="Description"
+                  placeholder="Notes"
                   value={item.description}
                   onChange={(e) => {
                     const updatedItems = [...items];
@@ -117,7 +117,7 @@ const Edit = (data) => {
           )}
         </div>
       ))}
-      <div className="home-btns">
+      <div className="home-buttons-again">
         <i className="fa-solid fa-plus homebtn" onClick={handleAddInputs}></i>
         <i
           className="fa-solid fa-circle-check homebtn"
