@@ -61,7 +61,7 @@ const ListWork = () => {
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <div class="loader"></div>;
   }
 
   if (error) {

@@ -15,7 +15,7 @@ const Received = () => {
   });
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <div class="loader"></div>;
   }
 
   if (error) {
@@ -84,7 +84,7 @@ const QueryUserComponent = ({ userId }) => {
   });
 
   if (loading) {
-    return <span>Loading...</span>;
+    return <div class="loader"></div>;
   }
 
   if (error) {

@@ -17,7 +17,7 @@ const Friends = () => {
   // Mutation hook for removing a friend
   const [removeFriendMutation] = useMutation(REMOVE_FRIEND);
 
-  if (loading || loadingUsers) return <p>Loading...</p>;
+  if (loading || loadingUsers) return <div class="loader"></div>;
 
   const { me } = data;
 

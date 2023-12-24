@@ -46,7 +46,7 @@ const ReceivedWork = () => {
   const user = userData?.user;
 
   if (loading || userLoading) {
-    return <p>Loading...</p>;
+    return <div class="loader"></div>;
   }
 
   if (error || userError) {
