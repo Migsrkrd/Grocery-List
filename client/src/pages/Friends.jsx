@@ -1,66 +1,77 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ProfileNav from "../components/ProfileNav";
 import { useQuery, useMutation } from "@apollo/client";
 import { QUERY_ME, QUERY_USERS } from "../utils/queries";
-import { ADD_FRIEND, REMOVE_FRIEND } from "../utils/mutations";
+import { CREATE_NOTIFICATION, REMOVE_FRIEND } from "../utils/mutations";
+import Auth from "../utils/auth";
 
 const Friends = () => {
-  // Fetching data using useQuery
   const { loading, error, data } = useQuery(QUERY_ME);
   const { loading: loadingUsers, data: dataUsers } = useQuery(QUERY_USERS);
 
   const [searchQuery, setSearchQuery] = useState("");
+  const [friendIcons, setFriendIcons] = useState({});
   const [hasInteracted, setHasInteracted] = useState(false);
 
-  // Mutation hook for adding a friend
-  const [addFriendMutation] = useMutation(ADD_FRIEND);
-  // Mutation hook for removing a friend
+  const [addFriendMutation] = useMutation(CREATE_NOTIFICATION);
   const [removeFriendMutation] = useMutation(REMOVE_FRIEND);
 
-  if (loading || loadingUsers) return <div class="loader"></div>;
+  console.log("datausers",dataUsers);
+
+  useEffect(() => {
+    if (dataUsers && dataUsers.users) {
+      const initialFriendIcons = {};
+      dataUsers.users.forEach((user) => {
+        initialFriendIcons[user._id] = "fas fa-user-plus";
+      });
+      setFriendIcons(initialFriendIcons);
+    }
+  }, [dataUsers]);
+
+  if (loading || loadingUsers || !dataUsers) return <div className="loader"></div>;
 
   const { me } = data;
 
-  // Filter users based on search query
   const filteredUsers = searchQuery
     ? dataUsers.users.filter(
         (user) =>
           (user.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
             user.email.toLowerCase().includes(searchQuery.toLowerCase())) &&
-          user._id !== me._id // Exclude the current user from search results
+          user._id !== me._id
       )
     : [];
 
-  // Check if a user is already a friend
   const isFriend = (userId) => {
     return me.friends.some((friend) => friend._id === userId);
   };
 
-  // Function to handle adding a friend
   const handleAddFriend = async (friendId) => {
     try {
       await addFriendMutation({
-        variables: { friendId },
+        variables: {
+          userId: friendId,
+          text: `${Auth.getProfile().data.username} wants to add you as a friend!`,
+        },
         refetchQueries: [{ query: QUERY_ME }],
       });
-      // window.location.reload(); // Reload the page to reflect the changes
+
+      setFriendIcons((prevIcons) => ({
+        ...prevIcons,
+        [friendId]: "fa-solid fa-check",
+      }));
     } catch (error) {
       console.error("Error adding friend:", error.message);
-      // window.location.reload();
     }
   };
 
-  // Function to handle removing a friend
   const handleRemoveFriend = async (friendId) => {
     try {
       await removeFriendMutation({
         variables: { friendId },
         refetchQueries: [{ query: QUERY_ME }],
       });
-      // window.location.reload(); // Reload the page to reflect the changes
     } catch (error) {
       console.error("Error removing friend:", error.message);
-      // window.location.reload();
     }
   };
 
@@ -73,7 +84,6 @@ const Friends = () => {
           <p className="border-top"></p>
           {me.friends.map((friend) => (
             <ul key={friend._id} className="friends-list">
-              
               <li>
                 @{friend.username}
                 <i onClick={() => handleRemoveFriend(friend._id)} className="fa-solid fa-x remfriend"></i>
@@ -91,7 +101,7 @@ const Friends = () => {
               value={searchQuery}
               onChange={(e) => {
                 setSearchQuery(e.target.value);
-                setHasInteracted(true); // Set hasInteracted to true on input change
+                setHasInteracted(true);
               }}
             />
           </form>
@@ -101,7 +111,11 @@ const Friends = () => {
                 <li key={user._id} className="search-result">
                   <span className="search-username">@{user.username}</span> ({user.email})
                   {!isFriend(user._id) && (
-                    <i className="fas fa-user-plus addfriend" onClick={() => handleAddFriend(user._id)}></i>
+                    <i
+                      className={friendIcons[user._id]}
+                      id="addfriend"
+                      onClick={() => handleAddFriend(user._id)}
+                    ></i>
                   )}
                 </li>
               ))}

@@ -6,6 +6,7 @@ type User {
     friends: [User]
     lists: [List]
     receivedLists: [List]
+    notifications: [Notification]
     }
 
 type Auth {
@@ -27,6 +28,15 @@ type List {
     items: [Item]
     isSent: Boolean
     sentTo: [User]
+    dateCreated: String!
+    }
+
+type Notification {
+    _id: ID!
+    senderId: ID!
+    userId: ID!
+    isRead: Boolean
+    text: String!
     dateCreated: String!
     }
 
@@ -52,6 +62,9 @@ type Mutation {
     removeFriend(friendId: ID!): User
     removeReceivedList(listId: ID!, senderId: ID!): User
     updateItem(itemId: ID!, name: String, description: String, quantity: Int): Item
+    createNotification(text: String!, userId: ID!): Notification
+    markNotificationRead(notificationId: ID!): Notification
+    removeNotification(notificationId: ID!): Notification
     }
     `;
 

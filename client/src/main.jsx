@@ -9,6 +9,7 @@ import ListWork from "./pages/ListWork";
 import Friends from "./pages/Friends";
 import Received from "./pages/Received";
 import ReceivedWork from './pages/ReceivedWork';
+import Notificaions from './pages/Notifications';
 
 const router = createBrowserRouter([
     {
@@ -40,6 +41,11 @@ const router = createBrowserRouter([
                 path: "/received/:id/:index",
                 element: <ReceivedWork />
             },
+            {
+                path: "/notifications",
+                element: <Notificaions />
+            }
+
         ]
     }
 ]);

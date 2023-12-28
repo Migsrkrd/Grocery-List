@@ -36,6 +36,12 @@ const UserSchema = new Schema({
           ref: 'User',
         },
       ],
+    notifications: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Notification'
+        }
+    ]
 });
 
 // hash password before saving to database

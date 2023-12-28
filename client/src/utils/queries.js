@@ -11,6 +11,14 @@ export const QUERY_ME = gql`
           _id
           username
           email
+          notifications {
+            _id
+            isRead
+            text
+            dateCreated
+            senderId
+            userId
+          }
           receivedLists {
             _id
             userId

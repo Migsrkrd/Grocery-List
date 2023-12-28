@@ -157,6 +157,42 @@ export const SIGNUP_USER = gql`
         }
     }
     `
+
+    export const CREATE_NOTIFICATION = gql`
+    mutation createNotification($text: String!, $userId: ID!) {
+        createNotification(text: $text, userId: $userId) {
+          _id
+          dateCreated
+          isRead
+          senderId
+          text
+          userId
+        }
+      }
+    `
+
+    export const REMOVE_NOTIFICATION = gql`
+    mutation removeNotification($notificationId: ID!) {
+        removeNotification(notificationId: $notificationId) {
+          _id
+          dateCreated
+          isRead
+          text
+          userId
+        }
+      }
+    `
+    export const MARK_NOTIFICATION_READ = gql`
+    mutation markNotificationRead($notificationId: ID!) {
+        markNotificationRead(notificationId: $notificationId) {
+          _id
+          dateCreated
+          isRead
+          text
+          userId
+        }
+      }
+    `
     ;
 
     

@@ -1,5 +1,6 @@
-const { User, List, Item } = require("../models");
+const { User, List, Item, Notification } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
+const mongoose = require("mongoose");
 
 const resolvers = {
   Query: {
@@ -30,6 +31,7 @@ const resolvers = {
               }
             ],
           })
+          .populate("notifications");
       }
       throw new Error("You need to be logged in!");
     },
@@ -58,7 +60,8 @@ const resolvers = {
               path: "userId",
             }
           ],
-        });
+        })
+        .populate("notifications");
     },
     // get a user by username
     user: async (parent, { userId }) => {
@@ -80,7 +83,8 @@ const resolvers = {
               path: "userId",
             }
           ],
-        });
+        })
+        .populate("notifications");
     },
     // get all lists
     lists: async () => {
@@ -181,7 +185,6 @@ const resolvers = {
     },
     // remove a list
     removeList: async (parent, args, context) => {
-      console.log("user", context.user);
       if (context.user) {
         const list = await List.findByIdAndDelete(args.listId);
       }
@@ -279,6 +282,42 @@ const resolvers = {
           { new: true }
         );
         return item;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    //create a notification
+    createNotification: async (parent, args, context) => {
+      if (context.user) {
+        const notification = await Notification.create({
+          ...args,
+          senderId: context.user._id,
+        });
+        await User.findByIdAndUpdate(
+          { _id: args.userId },
+          { $push: { notifications: notification._id } },
+          { new: true }
+        );
+        return notification;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    //remove a notification
+    removeNotification: async (parent, args, context) => {
+      if (context.user) {
+          const notification = await Notification.findByIdAndDelete(args.notificationId);
+        return notification;
+      }
+      throw new AuthenticationError("You need to be logged in!");
+    },
+    //mark a notification as read
+    markNotificationRead: async (parent, args, context) => {
+      if (context.user) {
+        const notification = await Notification.findByIdAndUpdate(
+          { _id: args.notificationId },
+          { $set: { isRead: true } },
+          { new: true }
+        );
+        return notification;
       }
       throw new AuthenticationError("You need to be logged in!");
     },

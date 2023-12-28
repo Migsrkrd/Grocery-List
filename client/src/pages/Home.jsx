@@ -6,24 +6,43 @@ import Auth from "../utils/auth";
 const Home = () => {
   const [items, setItems] = useState([]);
   const [listName, setListName] = useState("");
+  const [loading, setLoading] = useState(true);
 
   // Mutation hooks
   const [addListMutation] = useMutation(ADD_LIST);
   const [addItemMutation] = useMutation(ADD_ITEM);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Show the loader
+        setLoading(true);
+
+        // ... your data fetching logic
+
+        // Simulate a delay (remove this in a real-world scenario)
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        // Hide the loader when loading is complete
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        // Handle error if needed
+        setLoading(false); // Ensure loader is hidden in case of an error
+      }
+    };
+
+    fetchData();
+  }, []); // Empty dependency array means this effect runs once after the initial render
+
   const addInput = () => {
     const newItem = {
-      name: "", // Set initially as an empty string
+      name: "",
       description: "",
       quantity: 1,
     };
     setItems([...items, newItem]);
   };
-
-  useEffect(() => {
-    // Add at least one input row when the component mounts
-    addInput();
-  }, []);
 
   const removeInput = (index) => {
     const updatedItems = items.filter((_, i) => i !== index);
@@ -80,7 +99,10 @@ const Home = () => {
 
   return (
     <div className="homePage">
-      {Auth.loggedIn() ? (
+      {loading ? (
+        // Loading content (message or spinner)
+        <div className="loader"></div>
+      ) : Auth.loggedIn() ? (
         <div className="homePage-content">
           <h3>Where to?</h3>
           <input
